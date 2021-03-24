@@ -5,7 +5,6 @@ import UserContext from './UserContext';
 import Chat from './components/chat/Chat';
 import Home from './components/home/Home';
 import Navbar from './components/layout/Navbar';
-import Navigation from './components/layout/Naviagtion';
 import { Container } from '@material-ui/core';
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
       <div className="App">
         <UserContext.Provider value={{ user, setUser }}>
           <Navbar />
-          <Container maxWidth="md" m={2} p={2}>
+          <Container maxWidth="md" m={2} p={2} style={{ marginTop: '2rem' }}>
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/chat" component={Chat} />

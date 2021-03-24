@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import UserContext from '../../UserContext';
 import { Link } from 'react-router-dom';
-import { Box, Container, Grid } from '@material-ui/core';
+import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
 
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
@@ -29,13 +29,25 @@ const Home = () => {
   return (
     <div>
       <Grid wrap="wrap">
-        <Container>
-          <h1>Home {JSON.stringify(user)}</h1>
-          <Box flexWrap="wrap" justifyContent="center">
-            <button onClick={setAsAbhishek}>Set as Abhishek</button>
-            <button onClick={setAsAditya}>Set as Aditya</button>
-            <Link to={'/chat'}>
-              <button>Go to chat</button>
+        <Container textOverflow="hidden">
+          <Typography
+            variant="h4"
+            color="inherit"
+            display="block"
+            paragraph
+            noWrap
+          >
+            Home {JSON.stringify(user)}
+          </Typography>
+          <Box flexWrap="wrap" justifyContent="center" component="div">
+            <Button onClick={setAsAbhishek} variant="contained" color="primary">
+              Set as Abhishek
+            </Button>
+            <Button onClick={setAsAditya}>Set as Aditya</Button>
+            <Link to={'/chat'} style={{ textDecoration: 'none' }}>
+              <Button variant="contained" color="secondary">
+                Go to chat
+              </Button>
             </Link>
           </Box>
         </Container>
