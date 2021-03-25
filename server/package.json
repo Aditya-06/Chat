@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Chat Application using the MERn stack",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aditya-06/Chat.git"
+  },
+  "author": "Aditya Ajmera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aditya-06/Chat/issues"
+  },
+  "homepage": "https://github.com/Aditya-06/Chat#readme"
+}
