@@ -3,6 +3,8 @@ import UserContext from '../../UserContext';
 import { Link } from 'react-router-dom';
 import { Box, Button, Container, Grid, Typography } from '@material-ui/core';
 
+import CreateChat from './CreateChat';
+
 const Home = () => {
   const { user, setUser } = useContext(UserContext);
 
@@ -30,6 +32,7 @@ const Home = () => {
     <div>
       <Grid wrap="wrap">
         <Container textOverflow="hidden">
+          <CreateChat />
           <Typography
             variant="h4"
             color="inherit"
