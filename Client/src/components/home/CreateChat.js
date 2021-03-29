@@ -1,5 +1,5 @@
 import React from 'react';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import UserContext from '../../UserContext';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -14,6 +14,8 @@ import {
   CardMedia,
   TextField,
 } from '@material-ui/core';
+import { io } from 'socket.io-client';
+let socket;
 
 const useStyles = makeStyles({
   root: {
@@ -25,8 +27,29 @@ const useStyles = makeStyles({
 });
 
 const CreateChat = () => {
+  const ENDPOINT = 'http://localhost:5000';
+
+  useEffect(() => {
+    socket = io(ENDPOINT, {
+      withCredentials: true,
+    });
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    };
+  }, [ENDPOINT]);
+
   const classes = useStyles();
+  const [room, setRoom] = useState('');
   const { user } = useContext(UserContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    socket.emit('create-room', room);
+    // eslint-disable-next-line no-console
+    console.log(room);
+    setRoom('');
+  };
 
   return (
     <Grid item md={6}>
@@ -78,18 +101,23 @@ const CreateChat = () => {
                         className={classes.root}
                         noValidate
                         autoComplete="off"
+                        onSubmit={handleSubmit}
                       >
                         {user && user.name ? (
                           <TextField
                             id="standard-basic"
                             label="Room Name"
                             placeholder={user.name}
+                            value={room}
+                            onChange={(e) => setRoom(e.target.value)}
                           />
                         ) : (
                           <TextField
                             id="standard-basic"
                             label="Room Name"
                             placeholder="Name..."
+                            value={room}
+                            onChange={(e) => setRoom(e.target.value)}
                           />
                         )}
                       </form>
