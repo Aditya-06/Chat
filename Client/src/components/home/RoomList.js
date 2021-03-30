@@ -35,7 +35,7 @@ const RoomList = ({ rooms }) => {
 
   return (
     <Grid item md={6}>
-      <Box container m={3}>
+      <Box container={true} m={3}>
         <Typography variant="h5" className={classes.title}>
           Chat Rooms
         </Typography>
@@ -45,8 +45,8 @@ const RoomList = ({ rooms }) => {
             <List>
               {rooms &&
                 rooms.map((room) => (
-                  <>
-                    <ListItem key={room._id}>
+                  <div key={room._id}>
+                    <ListItem>
                       <ListItemAvatar>
                         <Avatar style={{ backgroundColor: 'white' }}>
                           <ForumIcon
@@ -63,7 +63,7 @@ const RoomList = ({ rooms }) => {
                       />
                     </ListItem>
                     <Divider />
-                  </>
+                  </div>
                 ))}
             </List>
           </Box>

@@ -3,13 +3,12 @@ const app = express();
 const http = require('http').Server(app);
 const cors = require('cors');
 const io = require('socket.io')(http, {
-    cors: {
-     origin: "http://localhost:3000",
-     methods: ["GET", "POST"],
-     credentials: true
-    }
-  });
-
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+    credentials: true
+  }
+});
 
 const PORT = process.env.PORT || 5000;
 app.use(cors({ 

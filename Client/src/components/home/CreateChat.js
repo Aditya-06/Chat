@@ -34,7 +34,7 @@ const CreateChat = () => {
       withCredentials: true,
     });
     return () => {
-      socket.emit('disconnect');
+      //socket.emit('disconnect');
       socket.off();
     };
   }, [ENDPOINT]);
@@ -54,7 +54,7 @@ const CreateChat = () => {
   return (
     <Grid item md={6}>
       <Box
-        container
+        container={true}
         justify="center"
         alignContent="center"
         alignItems="center"
@@ -74,34 +74,27 @@ const CreateChat = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Grid container>
+            <Grid container={true}>
               <Grid item md={12}>
-                <Grid
-                  container
-                  justify="center"
-                  alignContent="center"
-                  alignItems="center"
+                <form
+                  className={classes.root}
+                  noValidate
+                  autoComplete="off"
+                  onSubmit={handleSubmit}
                 >
                   <Grid
-                    item
-                    md={8}
+                    container={true}
                     justify="center"
                     alignContent="center"
                     alignItems="center"
                   >
-                    <Box
-                      m={1}
-                      p={0.5}
-                      justifyContent="center"
-                      alignContent="center"
-                      alignItems="center"
-                      display="flex"
-                    >
-                      <form
-                        className={classes.root}
-                        noValidate
-                        autoComplete="off"
-                        onSubmit={handleSubmit}
+                    <Grid item md={8}>
+                      <Box
+                        m={1}
+                        p={0.5}
+                        justifyContent="center"
+                        alignItems="center"
+                        display="flex"
                       >
                         {user && user.name ? (
                           <TextField
@@ -120,21 +113,20 @@ const CreateChat = () => {
                             onChange={(e) => setRoom(e.target.value)}
                           />
                         )}
-                      </form>
-                    </Box>
+                      </Box>
+                    </Grid>
+                    <Grid item md={4}>
+                      <Button
+                        size="medium"
+                        color="primary"
+                        variant="contained"
+                        onClick={handleSubmit}
+                      >
+                        Create
+                      </Button>
+                    </Grid>
                   </Grid>
-                  <Grid
-                    item
-                    md={4}
-                    justify="center"
-                    alignContent="center"
-                    alignItems="center"
-                  >
-                    <Button size="medium" color="primary" variant="contained">
-                      Create
-                    </Button>
-                  </Grid>
-                </Grid>
+                </form>
               </Grid>
             </Grid>
           </CardActions>

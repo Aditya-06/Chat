@@ -40,7 +40,7 @@ const Home = () => {
     },
     {
       name: 'Study',
-      _id: '456',
+      _id: '45',
     },
     {
       name: 'Study',
@@ -54,10 +54,10 @@ const Home = () => {
 
   return (
     <div>
-      <Grid wrap="wrap">
-        <Container textOverflow="hidden">
+      <Grid>
+        <Container>
           <Grid
-            container
+            container={true}
             justify="center"
             alignContent="center"
             alignItems="center"
@@ -73,7 +73,7 @@ const Home = () => {
             paragraph
             noWrap
           >
-            Home {JSON.stringify(user)}
+            Home {user && user.name ? JSON.stringify(user.name) : ''}
           </Typography>
           <Box flexWrap="wrap" justifyContent="center" component="div">
             <Button onClick={setAsAbhishek} variant="contained" color="primary">
