@@ -4,33 +4,38 @@ const http = require('http').Server(app);
 const cors = require('cors');
 const io = require('socket.io')(http, {
   cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-    credentials: true
-  }
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
 });
 
 const PORT = process.env.PORT || 5000;
-app.use(cors({ 
-    credentials: true
-}));
+app.use(
+  cors({
+    credentials: true,
+  })
+);
 app.use(cors());
-  
+
 app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept'
-    );
-    next();
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  next();
 });
 
 app.get('/', (req, res) => {
-    res.json({ Msg: 'HI' });
-})
+  res.json({ Msg: 'HI' });
+});
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log(socket.id);
+  socket.on('create-room', (name) => {
+    console.log(`Room Name is ${name}`);
+  });
 });
 
 http.listen(PORT, () => {

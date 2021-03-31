@@ -11,7 +11,7 @@ import {
   ListItemText,
   Divider,
 } from '@material-ui/core';
-
+import { Link } from 'react-router-dom';
 import ForumIcon from '@material-ui/icons/Forum';
 
 const useStyles = makeStyles((theme) => ({
@@ -46,22 +46,25 @@ const RoomList = ({ rooms }) => {
               {rooms &&
                 rooms.map((room) => (
                   <div key={room._id}>
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar style={{ backgroundColor: 'white' }}>
-                          <ForumIcon
-                            style={{
-                              color: '#f50057',
-                              backgroundColor: 'white',
-                            }}
-                          />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={room.name}
-                        secondary={secondary ? 'Secondary text' : null}
-                      />
-                    </ListItem>
+                    <Link to={'/chat/' + room.id + '/' + room.name}>
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar style={{ backgroundColor: 'white' }}>
+                            <ForumIcon
+                              style={{
+                                color: '#f50057',
+                                backgroundColor: 'white',
+                              }}
+                            />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={room.name}
+                          secondary={secondary ? 'Secondary text' : null}
+                        />
+                      </ListItem>
+                    </Link>
+
                     <Divider />
                   </div>
                 ))}

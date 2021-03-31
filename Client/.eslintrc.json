@@ -9,7 +9,7 @@
     ],
     "rules": {
         "react/prop-types": 0,
-        "no-console": 1,
+        "no-console": "off",
         "no-unused-vars": 1
 
     },
