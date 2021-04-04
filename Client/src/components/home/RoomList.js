@@ -46,7 +46,10 @@ const RoomList = ({ rooms }) => {
               {rooms &&
                 rooms.map((room) => (
                   <div key={room._id}>
-                    <Link to={'/chat/' + room.id + '/' + room.name}>
+                    <Link
+                      to={'/chat/' + room._id + '/' + room.name}
+                      style={{ textDecoration: 'none' }}
+                    >
                       <ListItem>
                         <ListItemAvatar>
                           <Avatar style={{ backgroundColor: 'white' }}>

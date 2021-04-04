@@ -10,6 +10,8 @@ const io = require('socket.io')(http, {
   },
 });
 
+const { addUsers } = require('./helper');
+
 const PORT = process.env.PORT || 5000;
 app.use(
   cors({
@@ -35,6 +37,19 @@ io.on('connection', (socket) => {
   console.log(socket.id);
   socket.on('create-room', (name) => {
     console.log(`Room Name is ${name}`);
+  });
+  socket.on('join', ({ name, user_id, room_id }) => {
+    const { error, user } = addUsers({
+      socket_id: socket.id,
+      name,
+      room_id,
+      user_id,
+    });
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('join', user);
+    }
   });
 });
 

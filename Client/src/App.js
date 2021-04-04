@@ -17,7 +17,7 @@ function App() {
           <Container maxWidth="md" m={2} p={2} style={{ marginTop: '2rem' }}>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route exact path="/chat" component={Chat} />
+              <Route path="/chat/:room_id/:room_name" component={Chat} />
             </Switch>
           </Container>
         </UserContext.Provider>
