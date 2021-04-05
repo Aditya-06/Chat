@@ -19,6 +19,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -230,9 +231,17 @@ const Navbar = () => {
                 {list('left')}
               </Drawer>
             </React.Fragment>
-
             <Typography className={classes.title} variant="h5" noWrap>
-              Chat
+              <Link
+                to="/"
+                style={{
+                  textDecoration: 'none',
+                  textDecorationColor: 'white',
+                  color: 'white',
+                }}
+              >
+                Chat
+              </Link>
             </Typography>
 
             <div className={classes.grow} />
