@@ -9,9 +9,20 @@ const addUsers = ({ socket_id, name, user_id, room_id }) => {
   }
   const user = { socket_id, name, user_id, room_id };
   users.push(user);
+  console.log('User List: ', users);
   return {
     user,
   };
 };
 
-module.exports = { addUsers };
+const removeUser = ({ socket_id }) => {
+  const index = user.findIndex((user) => user.socket_id === socket_id);
+  if (index !== -1) {
+    return users.splice(index, 1)[0];
+  }
+};
+
+const getUser = (socket_id) =>
+  users.find((user) => user.socket_id === socket_id);
+
+module.exports = { addUsers, removeUser, getUser };
