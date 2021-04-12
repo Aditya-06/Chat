@@ -11,6 +11,7 @@ const Chat = () => {
   const { user } = useContext(UserContext);
   let { room_id, room_name } = useParams();
   const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -19,6 +20,12 @@ const Chat = () => {
 
     return () => {};
   }, [ENDPOINT]);
+
+  useEffect(() => {
+    socket.on('message', (message) => {
+      setMessages([...messages, message]);
+    });
+  }, [messages]);
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -36,6 +43,7 @@ const Chat = () => {
         {room_id} {room_name}
       </div>
       <Container>{user && user.name ? <h1>Chat</h1> : <h1>Chat</h1>}</Container>
+      <pre>{JSON.stringify(messages, null, '\t')}</pre>
       <Grid container>
         <Grid item md={2}></Grid>
         <Grid item md={8}>

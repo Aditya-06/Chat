@@ -1,4 +1,5 @@
 const express = require('express');
+const morgan = require('morgan');
 const app = express();
 const http = require('http').Server(app);
 const cors = require('cors');
@@ -9,8 +10,9 @@ const io = require('socket.io')(http, {
     credentials: true,
   },
 });
+app.use(morgan('dev'));
 
-const { addUsers } = require('./helper');
+const { addUsers, getUser, removeUser } = require('./helper');
 
 const PORT = process.env.PORT || 5000;
 app.use(
@@ -45,11 +47,27 @@ io.on('connection', (socket) => {
       room_id,
       user_id,
     });
+    socket.join(room_id);
     if (error) {
       console.log(error);
     } else {
       console.log('join', user);
     }
+  });
+  socket.on('sendMessage', (message, room_id, callback) => {
+    const user = getUser(socket.id);
+    const msgToStore = {
+      name: user.name,
+      user_id: user.user_id,
+      room_id,
+      text: message,
+    };
+    console.log('message: ', msgToStore);
+    io.to(room_id).emit('message', msgToStore);
+    callback();
+  });
+  socket.on('dissconnect', () => {
+    const user = removeUser(socket.id);
   });
 });
 
