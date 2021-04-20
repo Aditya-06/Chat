@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
 const app = express();
+
 const http = require('http').Server(app);
 const cors = require('cors');
 const io = require('socket.io')(http, {
@@ -10,9 +12,13 @@ const io = require('socket.io')(http, {
     credentials: true,
   },
 });
+
+const db = require('./configs/db');
 app.use(morgan('dev'));
 
-const { addUsers, getUser, removeUser } = require('./helper');
+db();
+
+const { addUsers, getUser, removeUser } = require('./middleware/helper');
 
 const PORT = process.env.PORT || 5000;
 app.use(
